@@ -8,10 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #FAF7F2;
+    --cream: #F0E6D6;
     --charcoal: #33312E;
-    --gold: #B79968;
-    --gold-soft: #E4D9C6;
+    --gold: #A9834F;
+    --gold-soft: #D9C4A3;
     --white: #FFFFFF;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -35,7 +35,7 @@
   .blob {
     position: absolute; border-radius: 50%;
     background: radial-gradient(circle, var(--gold-soft), transparent 70%);
-    filter: blur(40px); opacity: 0.5; z-index: 0; pointer-events: none;
+    filter: blur(40px); opacity: 0.55; z-index: 0; pointer-events: none;
     animation: drift 18s ease-in-out infinite;
   }
   @keyframes drift {
@@ -46,7 +46,7 @@
   .swoosh { display: block; }
   .swoosh svg { display: block; overflow: visible; }
   .swoosh-accent { width: 150px; margin-top: 20px; }
-  .swoosh-divider { width: 110px; margin: 0 auto 22px; opacity: 0.85; }
+  .swoosh-divider { width: 110px; margin: 0 auto 22px; opacity: 0.9; }
   .swoosh-divider.left { margin: 0 0 22px; }
 
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
@@ -68,7 +68,7 @@
   nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 22px 6vw;
-    position: sticky; top: 0; background: rgba(250,247,242,0.92);
+    position: sticky; top: 0; background: rgba(240,230,214,0.92);
     backdrop-filter: blur(10px); z-index: 20;
   }
   .logo-nav { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; }
@@ -192,7 +192,7 @@
   }
   .map-embed iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.3); }
 
-  footer { position: relative; text-align: center; padding: 28px; font-size: 0.72rem; opacity: 0.5; background: var(--cream); }
+  footer { position: relative; text-align: center; padding: 28px; font-size: 0.72rem; opacity: 0.55; background: var(--cream); }
 </style>
 </head>
 <body>
@@ -209,8 +209,8 @@
     <h1>Plenia</h1>
     <div class="swoosh swoosh-accent">
       <svg viewBox="0 0 182 40" fill="none">
-        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#B79968" stroke-width="1.6" stroke-linecap="round"/>
-        <circle cx="176" cy="3.6" r="5.4" fill="#B79968"/>
+        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
       </svg>
     </div>
     <p class="tagline">Salud y armonía en tu sonrisa</p>
@@ -218,7 +218,7 @@
     <a href="#contacto" class="btn-primary">Agenda tu valoración</a>
   </div>
   <div class="hero-img img-block reveal">
-    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=80" alt="Consultorio dental">
+    <img src="https://images.unsplash.com/photo-1704455306251-b4634215d98f?w=1000&q=80" alt="Consultorio dental">
     <div class="caption">Referencia — reemplazar con foto real de Plenia</div>
   </div>
 </section>
@@ -230,8 +230,8 @@
   <h2>Cuidamos tu sonrisa con calidez y precisión</h2>
   <div class="swoosh swoosh-divider">
     <svg viewBox="0 0 182 40" fill="none">
-      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#B79968" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="176" cy="3.6" r="5.4" fill="#B79968"/>
+      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
     </svg>
   </div>
   <p>En Plenia creemos que una sonrisa sana empieza con confianza. Combinamos tecnología dental moderna con atención cercana, para que cada visita se sienta tranquila, clara y sin sorpresas. Nos encontramos en el corazón de Temozón Norte, listos para acompañarte en cada etapa de tu salud bucal.</p>
@@ -239,7 +239,7 @@
 
 <div class="alt-section reveal">
   <div class="alt-img img-block">
-    <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=800&q=80" alt="Ortodoncia">
+    <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=800&q=80" alt="Revisión dental">
     <div class="caption">Referencia — reemplazar con foto real</div>
   </div>
   <div class="alt-text">
@@ -247,8 +247,8 @@
     <h2>Tratamientos pensados para ti</h2>
     <div class="swoosh swoosh-divider left">
       <svg viewBox="0 0 182 40" fill="none">
-        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#B79968" stroke-width="1.6" stroke-linecap="round"/>
-        <circle cx="176" cy="3.6" r="5.4" fill="#B79968"/>
+        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
       </svg>
     </div>
     <p>Desde prevención hasta estética avanzada, cada tratamiento se adapta a lo que tu sonrisa necesita.</p>
@@ -262,7 +262,7 @@
 
 <div class="alt-section reverse reveal">
   <div class="alt-img img-block">
-    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=80" alt="Blanqueamiento dental">
+    <img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=800&q=80" alt="Sonrisa">
     <div class="caption">Referencia — reemplazar con foto real</div>
   </div>
   <div class="alt-text">
@@ -270,8 +270,8 @@
     <h2>Estética y salud en equilibrio</h2>
     <div class="swoosh swoosh-divider left">
       <svg viewBox="0 0 182 40" fill="none">
-        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#B79968" stroke-width="1.6" stroke-linecap="round"/>
-        <circle cx="176" cy="3.6" r="5.4" fill="#B79968"/>
+        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
       </svg>
     </div>
     <p>Recupera el brillo de tu sonrisa o protege tus dientes con tratamientos especializados y seguros.</p>
@@ -288,15 +288,15 @@
   <div class="blob" style="width:260px;height:260px;top:10%;right:-80px;background:radial-gradient(circle,#4a463f,transparent 70%);"></div>
   <div class="dentist-inner">
     <div class="dentist-photo img-block" style="border-radius:50%;">
-      <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80" alt="Dentista">
+      <img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=500&q=80&fit=crop&crop=faces" alt="Dentista">
     </div>
     <div class="dentist-text">
       <div class="eyebrow">Conoce a tu dentista</div>
       <h3>[Nombre del Dr./Dra.]</h3>
       <div class="swoosh swoosh-divider dentist-div" style="filter:brightness(1.4);">
         <svg viewBox="0 0 182 40" fill="none">
-          <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#B79968" stroke-width="1.6" stroke-linecap="round"/>
-          <circle cx="176" cy="3.6" r="5.4" fill="#B79968"/>
+          <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
         </svg>
       </div>
       <div class="dentist-cred">Cédula profesional: [XXXXXXX]</div>
@@ -310,22 +310,22 @@
   <h2>Resultados que hablan por sí solos</h2>
   <div class="swoosh swoosh-divider">
     <svg viewBox="0 0 182 40" fill="none">
-      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#B79968" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="176" cy="3.6" r="5.4" fill="#B79968"/>
+      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
     </svg>
   </div>
   <p>Cada sonrisa es distinta. Estos son algunos de los cambios que hemos logrado junto a nuestros pacientes.</p>
   <div class="results-grid">
     <div class="result-card img-block">
-      <img src="https://images.unsplash.com/photo-1581585504071-2e13068a1ff5?w=500&q=80" alt="Caso 1">
+      <img src="https://images.unsplash.com/photo-1704455306251-b4634215d98f?w=500&q=80&crop=entropy" alt="Caso 1">
       <div class="caption">Referencia — foto real 1</div>
     </div>
     <div class="result-card img-block">
-      <img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=500&q=80" alt="Caso 2">
+      <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=500&q=80&crop=entropy" alt="Caso 2">
       <div class="caption">Referencia — foto real 2</div>
     </div>
     <div class="result-card img-block">
-      <img src="https://images.unsplash.com/photo-1595829781021-05a11f5d5b6f?w=500&q=80" alt="Caso 3">
+      <img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=500&q=80&crop=entropy" alt="Caso 3">
       <div class="caption">Referencia — foto real 3</div>
     </div>
   </div>
@@ -336,8 +336,8 @@
   <h2>Agenda tu cita hoy</h2>
   <div class="swoosh swoosh-divider">
     <svg viewBox="0 0 182 40" fill="none">
-      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#B79968" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="176" cy="3.6" r="5.4" fill="#B79968"/>
+      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
     </svg>
   </div>
   <div class="contact-details">
@@ -356,7 +356,7 @@
   </div>
   <div class="contact-buttons">
     <a href="https://wa.me/529993558631" class="btn-primary">WhatsApp</a>
-    <a href="#" class="btn-outline">Cómo llegar</a>
+    <a href="https://maps.app.goo.gl/8gTZUbn9TiYzMWX88" class="btn-outline">Cómo llegar</a>
   </div>
   <div class="map-embed">
     <iframe src="https://www.google.com/maps?q=Calle+40+Diagonal+12523+Temozon+Norte+Merida&output=embed" loading="lazy"></iframe>
