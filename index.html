@@ -32,15 +32,17 @@
   }
   a { text-decoration: none; }
 
+  /* backgrounds/wave containers never animate — only inner content does, so seams never crack */
   .blob {
     position: absolute; border-radius: 50%;
     background: radial-gradient(circle, var(--gold-soft), transparent 70%);
-    filter: blur(40px); opacity: 0.55; z-index: 0; pointer-events: none;
-    animation: drift 18s ease-in-out infinite;
+    filter: blur(40px); opacity: 0.6; z-index: 0; pointer-events: none;
+    animation: drift 14s ease-in-out infinite;
   }
   @keyframes drift {
     0%, 100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(30px,-20px) scale(1.08); }
+    33% { transform: translate(30px,-25px) scale(1.1); }
+    66% { transform: translate(-20px,15px) scale(0.95); }
   }
 
   .swoosh { display: block; }
@@ -48,13 +50,43 @@
   .swoosh-accent { width: 150px; margin-top: 20px; }
   .swoosh-divider { width: 110px; margin: 0 auto 22px; opacity: 0.9; }
   .swoosh-divider.left { margin: 0 0 22px; }
+  .swoosh path {
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: drawSwoosh 1.4s var(--ease) forwards;
+    animation-play-state: paused;
+  }
+  .swoosh circle {
+    opacity: 0;
+    transform-origin: center;
+    animation: popDot 0.5s var(--ease) forwards;
+    animation-play-state: paused;
+    animation-delay: 1.1s;
+  }
+  .reveal.is-visible .swoosh path,
+  .reveal.is-visible .swoosh circle { animation-play-state: running; }
+  @keyframes drawSwoosh { to { stroke-dashoffset: 0; } }
+  @keyframes popDot { 0% { opacity:0; transform:scale(0);} 70% {opacity:1; transform:scale(1.3);} 100% {opacity:1; transform:scale(1);} }
 
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  /* reveal now wraps INNER content only — section bg + wave stay put */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-stagger > * { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+  .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
+  .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; }
+  .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; }
+  .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.45s; }
+  .reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
 
   .img-block { position: relative; overflow: hidden; background: var(--gold-soft); border-radius: 20px; }
-  .img-block img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s var(--ease); }
-  .img-block:hover img { transform: scale(1.05); }
+  .img-block img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 0.8s var(--ease);
+    transform: scale(1.15);
+  }
+  .reveal.is-visible .img-block img { transform: scale(1); }
+  .img-block:hover img { transform: scale(1.08) !important; }
   .img-block .caption {
     position: absolute; bottom: 0; left: 0; right: 0;
     background: linear-gradient(to top, rgba(51,49,46,0.75), transparent);
@@ -62,8 +94,13 @@
     text-transform: uppercase; padding: 16px 14px 8px;
   }
 
-  .wave { display: block; width: 100%; line-height: 0; }
+  .wave { display: block; width: 100%; line-height: 0; position: relative; overflow: hidden; }
   .wave svg { width: 100%; height: 60px; display: block; }
+  .wave path { animation: waveBreathe 6s ease-in-out infinite; transform-origin: center; }
+  @keyframes waveBreathe {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50% { transform: translateY(-4px) scaleY(1.06); }
+  }
 
   nav {
     display: flex; justify-content: space-between; align-items: center;
@@ -75,10 +112,10 @@
   .nav-cta {
     background: var(--charcoal); color: var(--white); padding: 9px 20px;
     border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.05em;
-    transition: background 0.4s var(--ease), transform 0.4s var(--ease);
+    transition: background 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
     white-space: nowrap;
   }
-  .nav-cta:hover { background: var(--gold); transform: translateY(-2px); }
+  .nav-cta:hover { background: var(--gold); transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 20px rgba(169,131,79,0.35); }
 
   .hero {
     position: relative;
@@ -100,9 +137,14 @@
     background: var(--charcoal); color: var(--white);
     padding: 15px 34px; font-size: 0.82rem; letter-spacing: 0.08em;
     text-transform: uppercase; border-radius: 30px;
-    transition: background 0.4s var(--ease), transform 0.4s var(--ease);
+    transition: background 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    animation: pulseGlow 3s ease-in-out infinite;
   }
-  .btn-primary:hover { background: var(--gold); transform: translateY(-3px); }
+  .btn-primary:hover { background: var(--gold); transform: translateY(-4px) scale(1.03); box-shadow: 0 12px 28px rgba(169,131,79,0.4); animation-play-state: paused; }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(169,131,79,0.25); }
+    50% { box-shadow: 0 0 0 10px rgba(169,131,79,0); }
+  }
   .hero-img { aspect-ratio: 4/3; width: 100%; }
 
   @media (min-width: 900px) {
@@ -114,7 +156,7 @@
     .hero-img { flex: 1; aspect-ratio: 4/5; align-self: stretch; height: auto; }
   }
 
-  .about { position: relative; background: var(--white); padding: 90px 6vw; text-align: center; }
+  .about { position: relative; background: var(--white); padding: 90px 6vw; text-align: center; overflow: hidden; }
   .about h2 { font-size: 2.1rem; margin: 10px 0 20px; }
   .about p { max-width: 560px; margin: 0 auto; opacity: 0.85; }
 
@@ -130,11 +172,15 @@
   .alt-text ul li {
     padding: 12px 0; border-top: 1px solid var(--gold-soft);
     font-size: 0.92rem; display: flex; justify-content: space-between;
-    transition: padding-left 0.4s var(--ease);
+    transition: padding-left 0.4s var(--ease), background 0.4s var(--ease);
   }
-  .alt-text ul li:hover { padding-left: 8px; }
+  .alt-text ul li:hover { padding-left: 12px; background: rgba(169,131,79,0.06); }
   .alt-text ul li:last-child { border-bottom: 1px solid var(--gold-soft); }
-  .alt-text ul li span.tag { color: var(--gold); font-size: 0.72rem; letter-spacing: 0.08em; }
+  .alt-text ul li span.tag {
+    color: var(--gold); font-size: 0.72rem; letter-spacing: 0.08em;
+    transition: transform 0.4s var(--ease);
+  }
+  .alt-text ul li:hover span.tag { transform: translateX(4px); }
 
   @media (min-width: 780px) {
     .alt-section { grid-template-columns: 1fr 1fr; gap: 60px; padding: 90px 6vw; }
@@ -148,7 +194,11 @@
     max-width: 900px; margin: 0 auto; display: grid; gap: 36px; align-items: center;
     text-align: center;
   }
-  .dentist-photo { aspect-ratio: 1; border-radius: 50%; overflow: hidden; max-width: 220px; margin: 0 auto; }
+  .dentist-photo {
+    aspect-ratio: 1; border-radius: 50%; overflow: hidden; max-width: 220px; margin: 0 auto;
+    transition: transform 0.5s var(--ease);
+  }
+  .dentist-photo:hover { transform: scale(1.05) rotate(-2deg); }
   .dentist-text .eyebrow { color: var(--gold); }
   .dentist-text h3 { font-size: 1.8rem; color: var(--white); margin: 10px 0 6px; }
   .dentist-cred { font-size: 0.78rem; opacity: 0.6; margin-bottom: 14px; }
@@ -160,36 +210,39 @@
     .swoosh-divider.dentist-div { margin: 0 0 14px; }
   }
 
-  .results { position: relative; padding: 90px 6vw; text-align: center; }
+  .results { position: relative; padding: 90px 6vw; text-align: center; overflow: hidden; }
   .results h2 { font-size: 2rem; margin: 10px 0 12px; }
   .results > p { opacity: 0.75; max-width: 460px; margin: 0 auto 44px; }
   .results-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 18px; max-width: 950px; margin: 0 auto;
   }
-  .result-card { aspect-ratio: 3/4; border-radius: 22px; transition: transform 0.5s var(--ease); }
-  .result-card:hover { transform: translateY(-6px); }
+  .result-card { aspect-ratio: 3/4; border-radius: 22px; transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+  .result-card:hover { transform: translateY(-10px) rotate(-1deg); box-shadow: 0 20px 40px rgba(51,49,46,0.2); }
 
-  .contact { position: relative; background: var(--white); padding: 90px 6vw 50px; text-align: center; }
+  .contact { position: relative; background: var(--white); padding: 90px 6vw 50px; text-align: center; overflow: hidden; }
   .contact h2 { font-size: 2rem; margin: 10px 0 26px; }
   .contact-details {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 34px;
     margin-bottom: 36px; font-size: 0.9rem;
   }
-  .contact-details div { max-width: 220px; }
+  .contact-details div { max-width: 220px; transition: transform 0.4s var(--ease); }
+  .contact-details div:hover { transform: translateY(-4px); }
   .contact-details .label { color: var(--gold); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
   .contact-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
   .btn-outline {
     border: 1px solid var(--charcoal); padding: 13px 28px;
     font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--charcoal); border-radius: 30px;
-    transition: background 0.4s var(--ease), color 0.4s var(--ease);
+    transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
   }
-  .btn-outline:hover { background: var(--charcoal); color: var(--white); }
+  .btn-outline:hover { background: var(--charcoal); color: var(--white); transform: translateY(-4px); }
   .map-embed {
     margin: 50px auto 0; height: 260px; max-width: 900px;
     border-radius: 20px; overflow: hidden; border: 1px solid var(--gold-soft);
+    transition: box-shadow 0.4s var(--ease);
   }
+  .map-embed:hover { box-shadow: 0 16px 32px rgba(51,49,46,0.15); }
   .map-embed iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.3); }
 
   footer { position: relative; text-align: center; padding: 28px; font-size: 0.72rem; opacity: 0.55; background: var(--cream); }
@@ -204,6 +257,7 @@
 
 <section class="hero">
   <div class="blob" style="width:280px;height:280px;top:-40px;left:-100px;"></div>
+  <div class="blob" style="width:180px;height:180px;bottom:0;right:20%;animation-delay:3s;"></div>
   <div class="hero-text reveal">
     <div class="eyebrow">Estudio Dental · Temozón Norte</div>
     <h1>Plenia</h1>
@@ -225,24 +279,26 @@
 
 <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#FFFFFF" d="M0,30 C240,60 480,0 720,25 C960,50 1200,10 1440,35 L1440,60 L0,60 Z"></path></svg></div>
 
-<section class="about reveal">
-  <div class="eyebrow">Sobre Plenia</div>
-  <h2>Cuidamos tu sonrisa con calidez y precisión</h2>
-  <div class="swoosh swoosh-divider">
-    <svg viewBox="0 0 182 40" fill="none">
-      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
-    </svg>
+<section class="about">
+  <div class="reveal">
+    <div class="eyebrow">Sobre Plenia</div>
+    <h2>Cuidamos tu sonrisa con calidez y precisión</h2>
+    <div class="swoosh swoosh-divider">
+      <svg viewBox="0 0 182 40" fill="none">
+        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
+      </svg>
+    </div>
+    <p>En Plenia creemos que una sonrisa sana empieza con confianza. Combinamos tecnología dental moderna con atención cercana, para que cada visita se sienta tranquila, clara y sin sorpresas. Nos encontramos en el corazón de Temozón Norte, listos para acompañarte en cada etapa de tu salud bucal.</p>
   </div>
-  <p>En Plenia creemos que una sonrisa sana empieza con confianza. Combinamos tecnología dental moderna con atención cercana, para que cada visita se sienta tranquila, clara y sin sorpresas. Nos encontramos en el corazón de Temozón Norte, listos para acompañarte en cada etapa de tu salud bucal.</p>
 </section>
 
-<div class="alt-section reveal">
-  <div class="alt-img img-block">
+<div class="alt-section">
+  <div class="alt-img img-block reveal">
     <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=800&q=80" alt="Revisión dental">
     <div class="caption">Referencia — reemplazar con foto real</div>
   </div>
-  <div class="alt-text">
+  <div class="alt-text reveal">
     <div class="eyebrow">Servicios</div>
     <h2>Tratamientos pensados para ti</h2>
     <div class="swoosh swoosh-divider left">
@@ -252,7 +308,7 @@
       </svg>
     </div>
     <p>Desde prevención hasta estética avanzada, cada tratamiento se adapta a lo que tu sonrisa necesita.</p>
-    <ul>
+    <ul class="reveal-stagger">
       <li>Limpieza dental <span class="tag">Prevención</span></li>
       <li>Ortodoncia <span class="tag">Brackets / Alineadores</span></li>
       <li>Diseño de sonrisa <span class="tag">Estética</span></li>
@@ -260,12 +316,12 @@
   </div>
 </div>
 
-<div class="alt-section reverse reveal">
-  <div class="alt-img img-block">
+<div class="alt-section reverse">
+  <div class="alt-img img-block reveal">
     <img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=800&q=80" alt="Sonrisa">
     <div class="caption">Referencia — reemplazar con foto real</div>
   </div>
-  <div class="alt-text">
+  <div class="alt-text reveal">
     <div class="eyebrow">Más tratamientos</div>
     <h2>Estética y salud en equilibrio</h2>
     <div class="swoosh swoosh-divider left">
@@ -275,7 +331,7 @@
       </svg>
     </div>
     <p>Recupera el brillo de tu sonrisa o protege tus dientes con tratamientos especializados y seguros.</p>
-    <ul>
+    <ul class="reveal-stagger">
       <li>Blanqueamiento dental <span class="tag">Estética</span></li>
       <li>Endodoncia <span class="tag">Tratamiento de conducto</span></li>
     </ul>
@@ -284,9 +340,9 @@
 
 <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path fill="#33312E" d="M0,35 C240,5 480,55 720,30 C960,5 1200,45 1440,20 L1440,60 L0,60 Z"></path></svg></div>
 
-<section class="dentist reveal">
+<section class="dentist">
   <div class="blob" style="width:260px;height:260px;top:10%;right:-80px;background:radial-gradient(circle,#4a463f,transparent 70%);"></div>
-  <div class="dentist-inner">
+  <div class="dentist-inner reveal">
     <div class="dentist-photo img-block" style="border-radius:50%;">
       <img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?w=500&q=80&fit=crop&crop=faces" alt="Dentista">
     </div>
@@ -305,17 +361,19 @@
   </div>
 </section>
 
-<section class="results reveal">
-  <div class="eyebrow">Casos reales</div>
-  <h2>Resultados que hablan por sí solos</h2>
-  <div class="swoosh swoosh-divider">
-    <svg viewBox="0 0 182 40" fill="none">
-      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
-    </svg>
+<section class="results">
+  <div class="reveal">
+    <div class="eyebrow">Casos reales</div>
+    <h2>Resultados que hablan por sí solos</h2>
+    <div class="swoosh swoosh-divider">
+      <svg viewBox="0 0 182 40" fill="none">
+        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
+      </svg>
+    </div>
+    <p>Cada sonrisa es distinta. Estos son algunos de los cambios que hemos logrado junto a nuestros pacientes.</p>
   </div>
-  <p>Cada sonrisa es distinta. Estos son algunos de los cambios que hemos logrado junto a nuestros pacientes.</p>
-  <div class="results-grid">
+  <div class="results-grid reveal-stagger">
     <div class="result-card img-block">
       <img src="https://images.unsplash.com/photo-1704455306251-b4634215d98f?w=500&q=80&crop=entropy" alt="Caso 1">
       <div class="caption">Referencia — foto real 1</div>
@@ -331,42 +389,44 @@
   </div>
 </section>
 
-<section class="contact reveal" id="contacto">
-  <div class="eyebrow">Contacto</div>
-  <h2>Agenda tu cita hoy</h2>
-  <div class="swoosh swoosh-divider">
-    <svg viewBox="0 0 182 40" fill="none">
-      <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
-    </svg>
-  </div>
-  <div class="contact-details">
-    <div>
-      <div class="label">Ubicación</div>
-      Calle 40 Diagonal 12523, Temozón Norte, 97302 Mérida, Yuc.
+<section class="contact" id="contacto">
+  <div class="reveal">
+    <div class="eyebrow">Contacto</div>
+    <h2>Agenda tu cita hoy</h2>
+    <div class="swoosh swoosh-divider">
+      <svg viewBox="0 0 182 40" fill="none">
+        <path d="M0.0,15.3 C2.5,15.3 9.6,14.6 15.1,15.1 C20.6,15.6 27.1,16.9 33.1,18.2 C39.1,19.4 45.1,21.0 51.1,22.5 C57.1,24.0 63.1,26.0 69.1,27.4 C75.1,28.7 81.3,29.9 87.1,30.8 C92.9,31.6 98.0,32.3 104.0,32.4 C110.0,32.5 116.9,32.3 123.1,31.5 C129.3,30.7 136.3,28.9 141.1,27.5 C145.9,26.2 148.9,24.9 151.9,23.4 C155.0,21.9 158.2,19.5 159.5,18.7" stroke="#A9834F" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="176" cy="3.6" r="5.4" fill="#A9834F"/>
+      </svg>
     </div>
-    <div>
-      <div class="label">Horario</div>
-      [Confirmar horario exacto]
+    <div class="contact-details">
+      <div>
+        <div class="label">Ubicación</div>
+        Calle 40 Diagonal 12523, Temozón Norte, 97302 Mérida, Yuc.
+      </div>
+      <div>
+        <div class="label">Horario</div>
+        [Confirmar horario exacto]
+      </div>
+      <div>
+        <div class="label">Teléfono</div>
+        999 355 8631
+      </div>
     </div>
-    <div>
-      <div class="label">Teléfono</div>
-      999 355 8631
+    <div class="contact-buttons">
+      <a href="https://wa.me/529993558631" class="btn-primary">WhatsApp</a>
+      <a href="https://maps.app.goo.gl/8gTZUbn9TiYzMWX88" class="btn-outline">Cómo llegar</a>
     </div>
-  </div>
-  <div class="contact-buttons">
-    <a href="https://wa.me/529993558631" class="btn-primary">WhatsApp</a>
-    <a href="https://maps.app.goo.gl/8gTZUbn9TiYzMWX88" class="btn-outline">Cómo llegar</a>
-  </div>
-  <div class="map-embed">
-    <iframe src="https://www.google.com/maps?q=Calle+40+Diagonal+12523+Temozon+Norte+Merida&output=embed" loading="lazy"></iframe>
+    <div class="map-embed">
+      <iframe src="https://www.google.com/maps?q=Calle+40+Diagonal+12523+Temozon+Norte+Merida&output=embed" loading="lazy"></iframe>
+    </div>
   </div>
 </section>
 
 <footer>Plenia Estudio Dental · Temozón Norte, Mérida, Yucatán</footer>
 
 <script>
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
